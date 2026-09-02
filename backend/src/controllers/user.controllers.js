@@ -169,6 +169,7 @@ export const deleteAccount = async (req,res) =>{
             message: "Account deleted successfully"
         });
 
+
     }catch(err){
         console.log(err);
         return res.status(200).json({
