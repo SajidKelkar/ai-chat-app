@@ -11,7 +11,7 @@ dns.setServers(["1.1.1.1","8.8.8.8"]);
 const startServer = async ()=>{
     try{
         await connectDb();
-
+        
         app.listen(process.env.PORT,()=>{
             console.log(`Server is listning on port ${process.env.PORT}`);
         })
@@ -19,6 +19,7 @@ const startServer = async ()=>{
     catch(err){
         console.log(err.message);
     }
+
 };
 
 startServer();
