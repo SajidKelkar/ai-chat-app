@@ -26,5 +26,4 @@ export const generateAiResponse = async ({model,messages}) =>{
             totalTokens: promptTokens + completionTokens
         }
     };
-
 };
