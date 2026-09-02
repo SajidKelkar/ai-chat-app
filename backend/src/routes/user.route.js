@@ -12,6 +12,4 @@ userRouter.get("/profile", userAuthMiddleware, profile);
 userRouter.post("/delete", userAuthMiddleware, deleteAccount);
 
 
-
-
 export default userRouter;
