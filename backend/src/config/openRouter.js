@@ -1,11 +1,14 @@
-import { OpenRouter } from '@openrouter/sdk';
+import "dotenv/config";
+import { OpenRouter } from "@openrouter/sdk";
 
-if(!process.env.OPENROUTER_API_KEY){
-    throw new Error("Open router api key is missing");
+const apiKey = process.env.OPENROUTER_API_KEY;
+
+if (!apiKey) {
+    throw new Error("Open Router API Key is Missing");
 }
 
 const openRouter = new OpenRouter({
-    apiKey: process.env.OPENROUTER_API_KEY
+    apiKey: apiKey
 });
 
 export default openRouter;
