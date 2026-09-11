@@ -1,0 +1,14 @@
+$kind: http-request
+url: http://localhost:3000/api/user/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\": \"abc2@gmail.com\",\r
+
+    \    \"password\": \"Abcd@1290\"\r
+
+    }"
+settings: {}
+order: 1000

@@ -1,4 +1,4 @@
-export const addChatTokenUsage = async ({ chat, usage }) => {
+export const addChatTokenUsage = async ( chat, usage ) => {
 
     chat.usage.promptTokens += usage.promptTokens;
     chat.usage.completionTokens += usage.completionTokens;

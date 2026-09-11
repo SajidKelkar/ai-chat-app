@@ -1,0 +1,5 @@
+$kind: http-request
+url: http://localhost:3000/api/message/6a8471ffb247b7e374d39f3f
+method: GET
+settings: {}
+order: 2000

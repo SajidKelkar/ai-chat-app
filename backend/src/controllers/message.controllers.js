@@ -2,6 +2,7 @@ import Chat from "../models/chat.model.js";
 import Message from "../models/message.model.js";
 import mongoose from "mongoose";
 import { generateAiResponse } from "../service/openRouterService.js";
+import { updateSummaryIfNeeded } from "../service/summaryService.js";
 import { buildMessagesForAI } from "../utils/chatContext.js";
 import { addChatTokenUsage } from "../utils/tokenUsage.js";
 import { resetUsageIfNeeded, hasTokenLimitReached, addUserTokenUsage } from "../utils/userUsage.js";
@@ -68,8 +69,8 @@ export const sendMessage = async (req,res) =>{
 
         if ( hasTokenLimitReached(req.user) ) {
             return res.status(429).json({
-            message: "Token limit reached. Please try after some time.",
-            usage: req.user.usage,
+                message: "Token limit reached. Please try after some time.",
+                usage: req.user.usage,
             });
         }
 
@@ -124,7 +125,7 @@ export const sendMessage = async (req,res) =>{
             model: chat.model,
             messages: messagesForAI,
         });
-
+        
         const userMessage = await Message.create({
             userId: req.user._id,
             chatId: chat._id,
@@ -136,7 +137,8 @@ export const sendMessage = async (req,res) =>{
             userId: req.user._id,
             chatId: chat._id,
             role: "assistant",
-            content: aiReply
+            content: aiReply,
+            usage
         })
 
         chat.messageCount += 2;
@@ -158,6 +160,7 @@ export const sendMessage = async (req,res) =>{
         })
 
         updateSummaryIfNeeded(chat._id);
+        
 
     }catch(err){
         console.log(err);

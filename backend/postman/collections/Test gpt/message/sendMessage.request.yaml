@@ -1,0 +1,14 @@
+$kind: http-request
+url: http://localhost:3000/api/message/6aa43f394b8b5dde37bc7f14
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"content\": \"Hello bhai kaise Hello\"\r
+
+    \    \r
+
+    }"
+settings: {}
+order: 1000

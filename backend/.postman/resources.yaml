@@ -1,0 +1,5 @@
+workspace:
+  id: dbb92c9a-fca4-460f-89dd-72ee9c7cdc60
+cloudResources:
+  collections:
+    ../postman/collections/Test gpt: 56562087-ee0d015b-e3f9-4e2b-93ee-67496f3404ea

@@ -1,0 +1,7 @@
+$kind: http-request
+url: http://localhost:3000/api/chat/6a847208b247b7e374d39f41
+method: GET
+auth:
+  type: noauth
+settings: {}
+order: 3000

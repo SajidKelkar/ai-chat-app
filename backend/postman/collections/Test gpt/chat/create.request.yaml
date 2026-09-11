@@ -1,0 +1,12 @@
+$kind: http-request
+url: http://localhost:3000/api/chat/createChat
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"model\": \"inclusionai/ling-3.0-flash-sante:free\"\r
+
+    }"
+settings: {}
+order: 1000
