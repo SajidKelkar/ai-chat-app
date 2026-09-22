@@ -8,14 +8,11 @@ const chatRouter = express.Router();
 chatRouter.use(userAuthMiddleware);
 
 
-
 chatRouter.post("/createChat",createChat);
 chatRouter.get("/getRecentChats",getRecentChats);
 chatRouter.get("/:chatId",getSingleChat);
 chatRouter.get("/",getSingleChat);
 chatRouter.delete("/:chatId",deleteChat);
-
-
 
 
 export default chatRouter;

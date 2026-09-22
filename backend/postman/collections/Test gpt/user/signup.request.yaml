@@ -5,11 +5,11 @@ body:
   type: json
   content: "{\r
 
-    \    \"name\": \"sajid\",\r
+    \    \"name\": \"abc\",\r
 
     \    \"age\": 20,\r
 
-    \    \"email\": \"abc2@gmail.com\",\r
+    \    \"email\": \"abc@gmail.com\",\r
 
     \    \"password\": \"Abcd@1290\"\r
 

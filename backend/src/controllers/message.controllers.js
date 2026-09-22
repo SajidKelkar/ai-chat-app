@@ -40,6 +40,17 @@ export const getMessage = async (req,res) =>{
             userId: req.user._id
         }).sort({ createdAt: 1 });
 
+        // const message = await Message.find(
+        // {
+        //     chatId: chatId,
+        //     userId: req.user._id
+        // },
+        // {
+        //     role: 1,
+        //     content: 1,
+        //     _id: 0
+        // }).sort({ createdAt: 1 });
+
         res.status(200).json({
             message: "Messages fetched seccessfull",
             msg: message
@@ -67,7 +78,7 @@ export const sendMessage = async (req,res) =>{
 
         await resetUsageIfNeeded(req.user);
 
-        if ( hasTokenLimitReached(req.user) ) {
+        if( hasTokenLimitReached(req.user) ) {
             return res.status(429).json({
                 message: "Token limit reached. Please try after some time.",
                 usage: req.user.usage,
@@ -104,7 +115,7 @@ export const sendMessage = async (req,res) =>{
             chat = await Chat.create({
                 userId: req.user._id,
                 model,
-                topic: content.trim().slice(0,40)
+                topic: content.trim().slice(0,30)
             })
 
         }
@@ -137,13 +148,12 @@ export const sendMessage = async (req,res) =>{
             userId: req.user._id,
             chatId: chat._id,
             role: "assistant",
-            content: aiReply,
-            usage
+            content: aiReply
         })
 
         chat.messageCount += 2;
         if(chat.topic === "New Chat"){
-            chat.topic = content.trim().slice(0, 40)
+            chat.topic = content.trim().slice(0, 30)
         }
         await chat.save();
 

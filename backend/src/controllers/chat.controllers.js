@@ -12,7 +12,7 @@ export const createChat = async (req,res)=>{
             })
         }
 
-        // model name verification incomplete.
+        // ..
 
         const createdChat = await Chat.create({
             userId: req.user._id,
@@ -47,15 +47,15 @@ export const deleteChat = async (req,res)=>{
             })
         }
 
-        const findChat = await Chat.findOne({_id: chatId, userId: req.user._id});
-        if(!findChat){
+        const userChat = await Chat.findOne({_id: chatId, userId: req.user._id});
+        if(!userChat){
             return res.status(400).json({
-                message: "not allowed to delete this chat"
+                message: "chat not found!"
             })
         }
 
         await Message.deleteMany({
-            chatId: findChat._id
+            chatId: userChat._id
         });
         
         await Chat.deleteOne({
@@ -103,18 +103,18 @@ export const getSingleChat = async (req,res)=>{
             })
         }
 
-        const findChat = await Chat.findOne({ _id: chatId, userId: req.user._id});
-        if(!findChat){
+        const userChat = await Chat.findOne({ _id: chatId, userId: req.user._id});
+        if(!userChat){
             return res.status(400).json({
                 message: "Chat not found"
             })
         }
 
         res.status(200).json({
-            chatId: findChat._id,
-            userId: findChat.userId,
-            topic: findChat.topic,
-            usage: findChat.usage
+            chatId: userChat._id,
+            userId: userChat.userId,
+            topic: userChat.topic,
+            usage: userChat.usage
         })
 
     }catch(err){

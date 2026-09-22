@@ -16,10 +16,10 @@ export const updateSummaryIfNeeded = async (chatId) => {
     }
 
     const messagesToSummarize = await Message.find({
-    chatId: chat._id,
-    }).sort({ createdAt: 1 })
-      .skip(chat.summarizedTillMessageNumber)
-      .limit(SUMMARY_CHUNK_SIZE);
+        chatId: chat._id,
+        }).sort({ createdAt: 1 })
+          .skip(chat.summarizedTillMessageNumber)
+          .limit(SUMMARY_CHUNK_SIZE);
 
     if (messagesToSummarize.length === 0) return;
 

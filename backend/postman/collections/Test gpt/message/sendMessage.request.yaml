@@ -1,13 +1,13 @@
 $kind: http-request
-url: http://localhost:3000/api/message/6aa43f394b8b5dde37bc7f14
+url: http://localhost:3000/api/message/6a847208b247b7e374d39f41
 method: POST
 body:
   type: json
   content: "{\r
 
-    \    \"content\": \"Hello bhai kaise Hello\"\r
+    \    \"content\": \"KJRIUR 83Y5934756 \",\r
 
-    \    \r
+    \    \"model\": \"gpt5\"\r
 
     }"
 settings: {}

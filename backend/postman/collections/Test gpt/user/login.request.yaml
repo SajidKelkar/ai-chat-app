@@ -5,9 +5,9 @@ body:
   type: json
   content: "{\r
 
-    \    \"email\": \"abc2@gmail.com\",\r
+    \    \"email\": \"sajid12@gmail.com\",\r
 
-    \    \"password\": \"Abcd@1290\"\r
+    \    \"password\": \"Sajid@1290\"\r
 
     }"
 settings: {}
