@@ -5,8 +5,8 @@ import { generateAiResponse } from "../service/openRouterService.js";
 import { updateSummaryIfNeeded } from "../service/summaryService.js";
 import { buildMessagesForAI } from "../utils/chatContext.js";
 import { addChatTokenUsage } from "../utils/tokenUsage.js";
-import { resetUsageIfNeeded, hasTokenLimitReached, addUserTokenUsage } from "../utils/userUsage.js";
-
+import { addUserTokenUsage } from "../utils/userUsage.js";
+import { redisClient } from "../config/redis.js";
 
 export const getMessage = async (req,res) =>{
     try{
@@ -74,15 +74,6 @@ export const sendMessage = async (req,res) =>{
             return res.status(400).json({
                 message: "content required"
             })
-        }
-
-        await resetUsageIfNeeded(req.user);
-
-        if( hasTokenLimitReached(req.user) ) {
-            return res.status(429).json({
-                message: "Token limit reached. Please try after some time.",
-                usage: req.user.usage,
-            });
         }
 
         let chat;
@@ -160,16 +151,32 @@ export const sendMessage = async (req,res) =>{
         await addChatTokenUsage(chat, usage);
         await addUserTokenUsage(req.user, usage.totalTokens);
 
+        const tokenUsed = await redisClient.incrBy(
+            req.tokenUsageKey,
+            usage.totalTokens
+        );
+
+        if (tokenUsed === usage.totalTokens) {
+            await redisClient.expire(
+            req.tokenUsageKey,
+            Number(process.env.TOKEN_WINDOW_SECONDS)
+            );
+        }
+
         res.status(201).json({
-            message: "message send successfully",
+            message: "Message sent successfully",
             chatId: chat._id,
             reply: aiReply,
             usage,
+            tokenUsed,
+            tokenLimit: Number(process.env.TOKEN_LIMIT),
             userMessage,
             assistantMessage
         })
 
-        updateSummaryIfNeeded(chat._id);
+        updateSummaryIfNeeded(chat._id).catch((error) => {
+            console.log("Summary update error:", error);
+        });
         
 
     }catch(err){

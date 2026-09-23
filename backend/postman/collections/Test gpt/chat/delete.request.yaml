@@ -1,5 +1,0 @@
-$kind: http-request
-url: http://localhost:3000/api/chat/6a84712fb247b7e374d39f3e
-method: DELETE
-settings: {}
-order: 2000

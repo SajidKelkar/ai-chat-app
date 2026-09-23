@@ -1,5 +1,4 @@
 import "dotenv/config";
-// console.log(`.env file loaded: ${Object.keys(result.parsed).length} variables`);
 
 import app from "./src/app.js";
 import connectDb from "./src/config/db.js";

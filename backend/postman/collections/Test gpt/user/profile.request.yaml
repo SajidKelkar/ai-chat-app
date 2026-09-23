@@ -1,5 +1,0 @@
-$kind: http-request
-url: http://localhost:3000/api/user/profile
-method: GET
-settings: {}
-order: 4000
