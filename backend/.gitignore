@@ -7,5 +7,5 @@ dist/
 build/
 
 .vscode/
-.postman
-postman
+.postman/
+postman/
