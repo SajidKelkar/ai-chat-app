@@ -194,7 +194,7 @@ export const deleteAccount = async (req,res) =>{
             _id: userId
         });
 
-        res.clearCookie("token",{ httpOnly: true, secure: false });
+        res.clearCookie("token",{ httpOnly: true, secure: true, sameSite: "none" });
 
         res.status(200).json({
             message: "Account deleted successfully"
@@ -203,7 +203,7 @@ export const deleteAccount = async (req,res) =>{
 
     }catch(err){
         console.log(err);
-        return res.status(200).json({
+        return res.status(500).json({
             message: "Internal server error"
         })
     }
