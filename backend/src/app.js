@@ -1,10 +1,23 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true
+}));
+
 app.use(express.json());
 app.use(cookieParser());
+
+app.get("/", (req, res) => {
+    res.status(200).json({
+        status: "ok",
+        message: "AI Chat API is running"
+    });
+});
 
 import userRouter from "./routes/user.route.js";
 import chatRouter from "./routes/chat.route.js";
