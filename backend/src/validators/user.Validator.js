@@ -8,7 +8,7 @@ export const signupSchema = z.object({
         .max(30, "Maximum length of name should be 30"),
     age:
         z.number()
-        .min(10,"Minium age should be 10")
+        .min(10,"Minimum age should be 10")
         .max(100,"Maximum age should be 100")
         .optional(),
     email:
